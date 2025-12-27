@@ -1,13 +1,18 @@
-import React from 'react'
+import React from "react";
+import { HeaderBody, HeaderDiv, Section } from "../../styles/Header.styled";
 
-const Header:React.FC = () => {
+const Header: React.FC = () => {
   return (
-    <div>
-      <div>
-        <p>AI-Marketplace</p>
-      </div>
-    </div>
-  )
-}
+    <>
+      <HeaderBody>
+        <HeaderDiv>
+          <Section>
+            <p>AI-Marketplace</p>
+          </Section>
+        </HeaderDiv>
+      </HeaderBody>
+    </>
+  );
+};
 
-export default Header
+export default Header;
