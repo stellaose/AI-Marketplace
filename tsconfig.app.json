@@ -34,6 +34,9 @@
       "@components/*": [
         "./src/components/*"
       ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
       "@hooks/*": [
         "./src/hooks/*"
       ],
@@ -48,6 +51,9 @@
       ],
       "@types/*": [
         "./src/types/*"
+      ],
+       "@assets/*": [
+        "./src/assets/*"
       ],
     }
   },
