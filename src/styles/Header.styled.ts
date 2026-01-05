@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderBody = styled.div`
-  background-color: #e9f5fdff;
+  background-color: var(--primary-color);
   padding: 12px 32px;
   position: fixed;
   left: 0;
@@ -19,7 +19,7 @@ export const Section = styled.div`
   align-items: center;
 
   p {
-    color: #000000;
+    color: var(--black-color);
     font-weight: 700;
     font-size: 28px;
   }
