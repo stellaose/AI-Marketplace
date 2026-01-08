@@ -33,3 +33,8 @@ export const LoaderDiv = styled.div`
     width: 120px;
   }
 `;
+
+export const AppBody = styled.div`
+  padding-top: 60px; 
+  min-height: calc(100vh - 120px); /* Adjust for footer height */
+`;
