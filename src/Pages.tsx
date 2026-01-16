@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ProductPage, CartPage, HomePage } from "./routes";
+import { ProductsPage, CartPage, HomePage, ProductDetailPage } from "./routes";
 import NotFound from "./NotFound";
 import AppLayout from "@components/layouts/AppLayout";
 
@@ -13,7 +13,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <ProductPage />,
+        element: <ProductsPage />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetailPage />,
       },
       {
         path: "/cart",
