@@ -7,4 +7,9 @@ export const GlobalStyle = createGlobalStyle`
   --secondary-color: #d5dcff;
   --main-color: #286291;
   --black-color: #1f2020;
+  --red-color: #C81909;
+  --main-red: #ff0000;
+  --green-color: #079c34;
+  
+  
 }`;

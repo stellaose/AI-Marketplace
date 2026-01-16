@@ -36,7 +36,7 @@ export const CartSection = styled.div`
   right: 0;
 
   p {
-    background-color: red;
+    background-color: var(--main-red);
     font-size: 10px;
     color: white;
     width: 14px;
