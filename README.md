@@ -7,3 +7,5 @@ Typescript,
 Zustand,
 Supabase
 Styled-components
+
+Visit the app (here)[https://ai-marketplace-thestellaose.vercel.app/] 
