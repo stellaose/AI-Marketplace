@@ -51,6 +51,9 @@ export const ProductDiv = styled.div`
 
 export const ProdDiv = styled.div`
   margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 `;
 
 export const ProdCardDiv = styled.div`
@@ -81,6 +84,7 @@ export const CardName = styled.p`
   font-size: 20px;
   font-weight: 600;
   width: 100%;
+  height: 3rem;
   text-overflow: ellipsis;
   text-overflow: hidden;
 
