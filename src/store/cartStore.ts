@@ -38,7 +38,7 @@ export const useCartStore = create<any>((set, get) => ({
 
     // ` save cart and items in state
     set({
-      cart: { id: user.id }, // use user.id as cart id for consistency
+      cart: { id: user.id },
       cartItems:
         items?.map((i) => ({
           id: i.id,
@@ -64,19 +64,28 @@ export const useCartStore = create<any>((set, get) => ({
       .maybeSingle();
 
     if (existing) {
-      // update quantity
+      // $ update quantity
       await supabase
         .from("cart_items")
         .update({ quantity: existing.quantity + 1 })
         .eq("id", existing.id);
+
+      await supabase
+        .from("products")
+        .update({ in_cart: true })
+        .eq("id", productId);
     } else {
-      // insert new item
+      // ? insert new item
       await supabase
         .from("cart_items")
         .insert({ user_id: user.id, product_id: productId, quantity: 1 });
+
+      await supabase
+        .from("products")
+        .update({ in_cart: true })
+        .eq("id", productId);
     }
 
-    // & reload cart
     await get().loadCart();
   },
 
@@ -88,10 +97,27 @@ export const useCartStore = create<any>((set, get) => ({
       .from("cart_items")
       .update({ quantity: qty })
       .eq("id", itemId);
+
+    await get().loadCart();
   },
 
   removeFromCart: async (itemId: string) => {
+    // ^ Get the product_id before deleting
+    const { data: item } = await supabase
+      .from("cart_items")
+      .select("product_id")
+      .eq("id", itemId)
+      .single();
+
     await supabase.from("cart_items").delete().eq("id", itemId);
+
+    if (item) {
+      await supabase
+        .from("products")
+        .update({ in_cart: false })
+        .eq("id", item.product_id);
+    }
+
     await get().loadCart();
   },
 
@@ -100,8 +126,24 @@ export const useCartStore = create<any>((set, get) => ({
     const user = get().user;
     if (!user) return;
 
+    // - Get all product_ids before deleting
+    const { data: items } = await supabase
+      .from("cart_items")
+      .select("product_id")
+      .eq("user_id", user.id);
+
     // ' Delete all items
     await supabase.from("cart_items").delete().eq("user_id", user.id);
+
+    // = Update products in_cart to false
+    if (items && items.length > 0) {
+      const productIds = items.map((i) => i.product_id);
+      await supabase
+        .from("products")
+        .update({ in_cart: false })
+        .in("id", productIds);
+    }
+
     set({ cartItems: [] });
   },
 }));

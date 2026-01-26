@@ -9,9 +9,14 @@ import { useEffect } from "react";
 import { useCartStore } from "@store/cartStore";
 function App() {
   const init = useCartStore((s) => s.init);
+  const loadCart = useCartStore((s) => s.loadCart);
 
   useEffect(() => {
-    init();
+    async function initApp() {
+      await init();
+      await loadCart();
+    }
+    initApp();
   }, []);
   return (
     <>
